@@ -103,7 +103,6 @@ export default {
               }
           });
 
-
       }
     },
     reset () {
