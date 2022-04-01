@@ -10,7 +10,7 @@
         v-for="mes in $store.state.messages" :key="mes.text"
         :name="mes.name"
         :text="mes.text"
-        owner
+        :owner="mes.id===$store.state.user.id"
       />
     </div>
     <div class="c-form">
