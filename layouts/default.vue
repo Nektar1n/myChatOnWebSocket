@@ -2,7 +2,7 @@
   <!-- App.vue -->
 
   <v-app app dark>
-    <v-navigation-drawer app v-model="drawer">
+    <v-navigation-drawer app v-model="drawer" mobile-break-point="650">
       <!-- -->
       <v-list subheader>
         <v-subheader>Previous chats</v-subheader>
@@ -42,9 +42,10 @@
     <v-content>
 
       <!-- Provides the application the proper gutter -->
-
+        <div style="height: 100%">
         <!-- If using vue-router -->
-        <nuxt/>
+           <nuxt/>
+        </div>
     </v-content>
 
   </v-app>

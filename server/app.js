@@ -12,6 +12,7 @@ io.on('connection', socket => {
       socket.join(data.room)
       callback({userId:socket.id})
       socket.emit('newMessage', m('admin', `Добро пожаловать ${data.name}`))
+    socket.emit('newMessage', m('alexey', `Дарова`))
       socket.broadcast
         .to(data.room)
         .emit('newMessage',m('admin', `Пользователь ${data.name} зашёл в комнату.`))
