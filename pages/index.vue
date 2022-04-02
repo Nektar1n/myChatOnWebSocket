@@ -2,6 +2,20 @@
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8>
       <v-card min-width="400">
+            <v-snackbar
+              v-model="snackbar"
+              :timeout="6000"
+              top
+            >
+              {{ message }}
+                <v-btn
+                  color="blue"
+                  flat
+                  @click="snackbar = false"
+                >
+                  Закрыть
+                </v-btn>
+            </v-snackbar>
           <v-card-title><h1>sweety</h1></v-card-title>
           <v-card-text>
           <v-form
@@ -81,6 +95,8 @@ export default {
       v => !!v || 'Пустая комната',
       // v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
     ],
+    snackbar:false,
+    message:'',
 
   }),
 
@@ -109,6 +125,16 @@ export default {
       this.$refs.form.reset()
     },
   },
+  mounted() {
+    const {message}=this.$route.query
+    if (message==='noUser'){
+      this.message='Введите данные'
+    }else if (message==='leftChat'){
+      this.message='Вы вышли из чата'
+    }
+
+    this.snackbar=!!this.message
+  }
 }
 </script>
 

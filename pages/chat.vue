@@ -1,12 +1,8 @@
 <template>
   <div class="c-wrap">
-    <div class="c-chat">
-<!--      <ul>-->
-<!--        <li v-for="mes in $store.state.messages" :key="mes.text">-->
-<!--          {{mes.text}}-->
-<!--        </li>-->
-<!--      </ul>-->
+    <div class="c-chat"  ref="chatWindow">
       <message
+        ref="mesWindow"
         v-for="mes in $store.state.messages" :key="mes.text"
         :name="mes.name"
         :text="mes.text"
@@ -14,7 +10,7 @@
       />
     </div>
     <div class="c-form">
-      <ChatForm/>
+      <ChatForm @scrollBottom="scrollBottom"/>
     </div>
   </div>
 
@@ -25,21 +21,30 @@ import Message from "../components/Message";
 import ChatForm from "../components/ChatForm";
 export default {
   name: "chat",
-  layout:'default',
+  layout:'chat-layout',
   head(){
     return{
       title:`Ты в комнате ${this.$store.state.user.room}`
     }
   },
+  methods:{
+    scrollBottom(){
+      console.log('hello' +this.$refs.chatWindow.pageYOffset)
+      setTimeout(()=>{
+        this.$refs.chatWindow.scrollTop=this.$refs.chatWindow.scrollHeight+40
+      },10)
+
+    }
+  },
   middleware:['chat'],
   data(){
     return{
-      userName:'',
-      num:8983989,
     }
   },
   mounted() {
-    this.userName=this.$store.state.user.name
+    // this.$refs.element.scrollTop=this.$refs.element.scrollHeight
+    // const objEl=document.getElementById('element')
+    // objEl.scrollTop=objEl.scrollHeight
   },
   components:{Message,ChatForm}
 }

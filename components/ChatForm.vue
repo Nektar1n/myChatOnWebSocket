@@ -16,6 +16,7 @@ export default {
   }),
   methods: {
     send(){
+      this.$emit('scrollBottom')
       this.$socket.emit('createMessage',{
         text: this.message,
         id: this.$store.state.user.id

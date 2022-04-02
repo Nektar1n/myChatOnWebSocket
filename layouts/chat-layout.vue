@@ -8,7 +8,7 @@
         <v-subheader>Previous chats</v-subheader>
 
         <v-list-tile class="users_list"
-          v-for="user in users"
+          v-for="user in $store.state.users"
           :key="user.id"
         >
 <!--          <v-list-item-avatar>-->
@@ -22,7 +22,7 @@
           </v-list-tile-content>
 
           <v-list-tile-action>
-            <v-icon :colour="user.id===2?'primary;':'grey;'">chat_bubble</v-icon>
+            <v-icon :colour="user.id===$store.state.user.id?'primary':'grey'">chat_bubble</v-icon>
           </v-list-tile-action>
         </v-list-tile>
       </v-list>
@@ -55,15 +55,14 @@
 export default {
   data:()=>({
     drawer:true,
-    users:[
-      {id:1, name:'User1'},
-      {id:2, name:'User2'}
-    ]
   }),
   methods:{
     exit(){
-      this.$router.push('/?message=leftChat')
-      this.$store.commit('clearUser')
+        this.$socket.emit('userLeft',this.$store.state.user.id,()=>{
+        this.$router.push('/?message=leftChat')
+        this.$store.commit('clearUser')
+      })
+
     }
   }
 };

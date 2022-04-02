@@ -20,7 +20,8 @@ io.on('connection', socket => {
       })
 
       callback({userId:socket.id})
-      socket.emit('newMessage', m('admin', `Добро пожаловать ${data.name}`))
+    io.to(data.room).emit('updateUsers', users.getByRoom(data.room))
+    socket.emit('newMessage', m('admin', `Добро пожаловать ${data.name}`))
       // socket.emit('newMessage', m('alexey', `Дарова`))
       socket.broadcast
         .to(data.room)
@@ -37,6 +38,23 @@ io.on('connection', socket => {
     }
     cb()
 
+  })
+
+  socket.on('userLeft',(id,callback)=>{
+    const user=users.remove(id)
+    if (user){
+      io.to(user.room).emit('updateUsers', users.getByRoom(user.room))
+      io.to(user.room).emit('newMessage',m('admin',`Пользователь ${user.name} покинул нас.`))
+    }
+    callback()
+  })
+  //disconnect это специальное событие когда текущий сокет(пользователь) закрывает вкладку
+  socket.on('disconnect',()=>{
+    const user=users.remove(socket.id)
+    if (user){
+      io.to(user.room).emit('updateUsers', users.getByRoom(user.room))
+      io.to(user.room).emit('newMessage',m('admin',`Пользователь ${user.name} покинул нас.`))
+    }
   })
 })
 
