@@ -16,7 +16,7 @@
                   Закрыть
                 </v-btn>
             </v-snackbar>
-          <v-card-title><h1>sweety</h1></v-card-title>
+          <v-card-title><h1>conf_Room</h1></v-card-title>
           <v-card-text>
           <v-form
             class="open_form"
@@ -76,7 +76,7 @@
 export default {
   layout:'empty',
   head:{
-    title: 'Добро пожаловать сладкий'
+    title: 'Добро пожаловать в conf_Room'
   },
   sockets: {
     connect: function() {

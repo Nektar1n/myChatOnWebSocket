@@ -5,7 +5,7 @@
     <v-navigation-drawer app v-model="drawer" mobile-break-point="650">
       <!-- -->
       <v-list subheader>
-        <v-subheader>Previous chats</v-subheader>
+        <v-subheader>Список пользователей</v-subheader>
 
         <v-list-tile class="users_list"
           v-for="user in $store.state.users"

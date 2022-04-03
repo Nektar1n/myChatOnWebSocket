@@ -3,7 +3,7 @@
     <div class="c-chat"  ref="chatWindow">
       <message
         ref="mesWindow"
-        v-for="mes in $store.state.messages" :key="mes.text"
+        v-for="mes in updateMessages" :key="mes.text"
         :name="mes.name"
         :text="mes.text"
         :owner="mes.id===$store.state.user.id"
@@ -31,7 +31,9 @@ export default {
     scrollBottom(){
       console.log('hello' +this.$refs.chatWindow.pageYOffset)
       setTimeout(()=>{
-        this.$refs.chatWindow.scrollTop=this.$refs.chatWindow.scrollHeight+40
+        // this.$refs.chatWindow.scrollTop=this.$refs.chatWindow.scrollHeight+40
+        this.$refs.chatWindow.scrollTo({top:this.$refs.chatWindow.scrollHeight+40
+        ,behavior:"smooth"})
       },10)
 
     }
@@ -39,6 +41,21 @@ export default {
   middleware:['chat'],
   data(){
     return{
+      messages:[]
+    }
+  },
+  computed:{
+    updateMessages(){
+      return this.messages=this.$store.state.messages
+    }
+  },
+  watch:{
+    messages(){
+      setTimeout(()=>{
+        // this.$refs.chatWindow.scrollTop=this.$refs.chatWindow.scrollHeight+40
+        this.$refs.chatWindow.scrollTo({top:this.$refs.chatWindow.scrollHeight+40
+          ,behavior:"smooth"})
+      },10)
     }
   },
   mounted() {
