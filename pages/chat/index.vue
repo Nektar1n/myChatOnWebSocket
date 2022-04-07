@@ -1,24 +1,24 @@
 <template>
-  <div class="c-wrap">
-    <div class="c-chat"  ref="chatWindow">
-      <message
-        ref="mesWindow"
-        v-for="mes in updateMessages" :key="mes.text"
-        :name="mes.name"
-        :text="mes.text"
-        :owner="mes.id===$store.state.user.id"
-      />
+    <div class="c-wrap">
+      <div class="c-chat"  ref="chatWindow">
+        <message
+          ref="mesWindow"
+          v-for="mes in updateMessages" :key="mes.text"
+          :name="mes.name"
+          :text="mes.text"
+          :owner="mes.id===$store.state.user.id"
+        />
+      </div>
+      <div class="c-form">
+        <ChatForm @scrollBottom="scrollBottom"/>
+      </div>
     </div>
-    <div class="c-form">
-      <ChatForm @scrollBottom="scrollBottom"/>
-    </div>
-  </div>
-
 </template>
 
 <script>
-import Message from "../components/Message";
-import ChatForm from "../components/ChatForm";
+import Message from "../../components/Message";
+import ChatForm from "../../components/ChatForm";
+import AboutUser from "./_user";
 export default {
   name: "chat",
   layout:'chat-layout',
@@ -63,7 +63,7 @@ export default {
     // const objEl=document.getElementById('element')
     // objEl.scrollTop=objEl.scrollHeight
   },
-  components:{Message,ChatForm}
+  components:{AboutUser, Message,ChatForm}
 }
 </script>
 

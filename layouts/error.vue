@@ -1,5 +1,10 @@
 <template>
-  <h1>error</h1>
+  <div class="error">
+    <h1>error</h1>
+    <router-link to="/">on main</router-link>
+  </div>
+
+
 </template>
 
 <script>

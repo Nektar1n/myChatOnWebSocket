@@ -21,7 +21,7 @@ io.on('connection', socket => {
 
       callback({userId:socket.id})
     io.to(data.room).emit('updateUsers', users.getByRoom(data.room))
-    socket.emit('newMessage', m('admin', `Добро пожаловать ${data.name}`))
+    socket.emit('newMessage', m('admin', `Добро пожаловать ${data.name}.`))
       // socket.emit('newMessage', m('alexey', `Дарова`))
       socket.broadcast
         .to(data.room)
